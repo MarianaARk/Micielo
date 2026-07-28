@@ -1,0 +1,1324 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Para mi Chelito 💖</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!--
+=====================================================================
+  CÓMO PONER TUS FOTOS (IMPORTANTE)
+=====================================================================
+  Este archivo busca 3 fotos por su nombre, guardadas EN LA MISMA
+  CARPETA que este HTML:
+
+      foto1.jpg   -> aparece apenas se abre la carta
+      foto2.jpg   -> aparece en la pantalla final (izquierda)
+      foto3.jpg   -> aparece en la pantalla final (derecha)
+
+  Si no las encuentra, muestra un marco bonito de "Tu foto aquí" en
+  su lugar, así que la página nunca se ve rota aunque falten. Solo
+  copia tus fotos a esa carpeta y ponles esos nombres exactos (o
+  cambia el atributo src="" de las 3 etiquetas <img> más abajo).
+=====================================================================
+-->
+
+<style>
+/* =========================================================
+   PARA MI CHELITO — Hoja de estilos
+   Paleta: rosa pastel, blanco, rojo héroe, azul héroe, dorado
+   ========================================================= */
+
+:root{
+  --pink-pastel: #ffd9e8;
+  --pink-soft:   #ffeef5;
+  --pink-deep:   #c2185b;
+  --pink-mid:    #e0356f;
+  --red-hero:    #e0273f;
+  --blue-hero:   #1c3c8c;
+  --gold:        #f4c542;
+  --white:       #ffffff;
+  --ink:         #3a2233;
+  --paper:       #fffaf9;
+  --font-display: 'Fredoka', system-ui, sans-serif;
+  --font-body: 'Quicksand', system-ui, sans-serif;
+}
+
+*{ box-sizing: border-box; }
+
+html,body{
+  margin:0; padding:0;
+  width:100%; min-height:100%;
+  background: linear-gradient(160deg, var(--pink-pastel) 0%, var(--pink-soft) 45%, #fff 100%);
+  font-family: var(--font-body);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* ============ FONDO DECORATIVO ============ */
+.bg-scene{
+  position: fixed; inset:0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.glow{
+  position:absolute;
+  border-radius:50%;
+  filter: blur(60px);
+  opacity:.55;
+}
+.glow-1{
+  width:420px; height:420px; top:-120px; left:-100px;
+  background: radial-gradient(circle, var(--pink-pastel), transparent 70%);
+}
+.glow-2{
+  width:480px; height:480px; bottom:-150px; right:-120px;
+  background: radial-gradient(circle, #ffc6de, transparent 70%);
+}
+.glow-3{
+  width:300px; height:300px; top:40%; left:50%; transform:translate(-50%,-50%);
+  background: radial-gradient(circle, #fff2f8, transparent 70%);
+  opacity:.4;
+}
+
+.web{
+  position:absolute;
+  width:220px; height:220px;
+  background:
+    repeating-conic-gradient(from 0deg, transparent 0 15deg, rgba(194,24,91,.16) 15.5deg 16deg);
+  border-radius:0;
+  opacity:.6;
+}
+.web::before{
+  content:"";
+  position:absolute; inset:0;
+  border-radius:50%;
+  background:
+    radial-gradient(circle, transparent 0 18%, rgba(194,24,91,.12) 18.4% 19%, transparent 19.4% 34%,
+    rgba(194,24,91,.12) 34.4% 35%, transparent 35.4% 50%, rgba(194,24,91,.12) 50.4% 51%,
+    transparent 51.4% 66%, rgba(194,24,91,.12) 66.4% 67%, transparent 67.4%);
+}
+.web-tl{ top:-60px; left:-60px; }
+.web-tr{ top:-60px; right:-60px; transform: scaleX(-1); }
+.web-bl{ bottom:-60px; left:-60px; transform: scaleY(-1); }
+.web-br{ bottom:-60px; right:-60px; transform: scale(-1,-1); }
+.web-mid{ width:140px; height:140px; top:45%; left:-40px; opacity:.35; }
+
+.stars{ position:absolute; inset:0; }
+.stars span{
+  position:absolute;
+  width:4px; height:4px;
+  background: var(--gold);
+  border-radius:50%;
+  opacity:.8;
+  animation: twinkle 2.6s ease-in-out infinite;
+}
+@keyframes twinkle{
+  0%,100%{ opacity:.15; transform: scale(.7); }
+  50%{ opacity:1; transform: scale(1.3); }
+}
+
+.floaters{ position:absolute; inset:0; }
+.floater{
+  position:absolute;
+  will-change: transform;
+  opacity:.85;
+  filter: drop-shadow(0 4px 8px rgba(194,24,91,.25));
+}
+.floater.heart{ color: var(--pink-mid); animation: floatUp linear infinite; }
+.floater.hero{ width:34px; height:34px; animation: swing ease-in-out infinite; transform-origin: top center; }
+.floater.kitty{ width:36px; height:36px; animation: bobble ease-in-out infinite; }
+.floater.hero2{ width:30px; height:30px; animation: swing ease-in-out infinite; transform-origin: top center; }
+.floater.kitty2{ width:32px; height:32px; animation: bobble ease-in-out infinite; }
+.floater.hero::before, .floater.hero2::before{
+  content:"";
+  position:absolute; left:50%; top:-60px;
+  width:1px; height:60px;
+  background: linear-gradient(var(--ink), transparent);
+  opacity:.35;
+}
+
+@keyframes floatUp{
+  0%{ transform: translateY(110vh) rotate(0deg); opacity:0; }
+  10%{ opacity:.9; }
+  90%{ opacity:.7; }
+  100%{ transform: translateY(-10vh) rotate(20deg); opacity:0; }
+}
+@keyframes swing{
+  0%,100%{ transform: rotate(-14deg); }
+  50%{ transform: rotate(14deg); }
+}
+@keyframes bobble{
+  0%,100%{ transform: translateY(0) rotate(-4deg); }
+  50%{ transform: translateY(-18px) rotate(4deg); }
+}
+
+/* ============ ESCENARIO PRINCIPAL ============ */
+.stage{
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 24px;
+}
+
+/* ============ ESCENA 1: SOBRE ============ */
+.envelope-scene{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap: 22px;
+  transition: opacity .6s ease, transform .6s ease;
+}
+.envelope-scene.hide{
+  opacity:0;
+  transform: scale(.85);
+  pointer-events:none;
+  position:absolute;
+}
+
+.envelope{
+  position:relative;
+  width: min(340px, 82vw);
+  height: min(230px, 55vw);
+  cursor:pointer;
+  perspective: 1200px;
+  outline:none;
+}
+.envelope-shadow{
+  position:absolute;
+  left:6%; right:6%; bottom:-18px;
+  height:24px;
+  background: radial-gradient(ellipse at center, rgba(194,24,91,.35), transparent 70%);
+  filter: blur(4px);
+  animation: shadowPulse 3.5s ease-in-out infinite;
+}
+@keyframes shadowPulse{
+  0%,100%{ transform: scaleX(1); opacity:.6; }
+  50%{ transform: scaleX(.92); opacity:.4; }
+}
+.envelope-back{
+  position:absolute; inset:0;
+  background: linear-gradient(160deg, #fff, var(--pink-soft));
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(194,24,91,.25), inset 0 0 0 1px rgba(194,24,91,.15);
+}
+.letter-peek{
+  position:absolute;
+  left:8%; right:8%; top:-6%;
+  height:60%;
+  background: var(--paper);
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 -4px 10px rgba(0,0,0,.06);
+  transform: translateY(10px);
+  transition: transform .8s ease;
+  z-index:1;
+}
+.envelope-front{
+  position:absolute; inset:0;
+  background: linear-gradient(160deg, var(--pink-mid), var(--pink-deep));
+  clip-path: polygon(0 0, 50% 42%, 100% 0, 100% 100%, 0 100%);
+  border-radius: 14px;
+  z-index:2;
+  box-shadow: inset 0 -10px 25px rgba(0,0,0,.08);
+}
+.envelope-flap{
+  position:absolute;
+  top:0; left:0; right:0;
+  height:58%;
+  background: linear-gradient(200deg, var(--pink-mid), var(--pink-deep) 80%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  border-radius: 14px 14px 0 0;
+  transform-origin: top center;
+  transform: rotateX(0deg);
+  transition: transform 1s cubic-bezier(.6,0,.4,1);
+  z-index:3;
+  box-shadow: 0 6px 10px rgba(0,0,0,.12);
+}
+.wax-seal{
+  position:absolute;
+  left:50%; top:38%;
+  transform: translate(-50%,-50%);
+  z-index:4;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,.35));
+  animation: sealGlow 2.4s ease-in-out infinite;
+}
+@keyframes sealGlow{
+  0%,100%{ filter: drop-shadow(0 3px 6px rgba(0,0,0,.35)) brightness(1); }
+  50%{ filter: drop-shadow(0 3px 10px rgba(224,53,111,.6)) brightness(1.12); }
+}
+
+.envelope.opening .envelope-flap{
+  transform: rotateX(180deg);
+}
+.envelope.opening .letter-peek{
+  transform: translateY(-46%);
+  transition: transform 1s ease .5s;
+}
+.envelope.opening .wax-seal{
+  opacity:0;
+  transform: translate(-50%,-50%) scale(1.6);
+  transition: opacity .4s ease, transform .4s ease;
+}
+
+.press-hint{
+  font-family: var(--font-display);
+  color: var(--pink-deep);
+  font-size: 1.05rem;
+  letter-spacing: .5px;
+  animation: hintPulse 1.8s ease-in-out infinite;
+}
+@keyframes hintPulse{
+  0%,100%{ opacity:.55; transform: translateY(0); }
+  50%{ opacity:1; transform: translateY(-3px); }
+}
+
+/* ============ ESCENA 2: CARTA ============ */
+.letter-scene{
+  position:absolute;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transform: translateY(40px) scale(.95);
+  transition: opacity .8s ease, transform .8s ease;
+}
+.letter-scene.show{
+  position:relative;
+  opacity:1;
+  pointer-events:auto;
+  transform: translateY(0) scale(1);
+}
+
+.paper{
+  position:relative;
+  width: min(640px, 92vw);
+  background: var(--paper);
+  border-radius: 18px;
+  padding: clamp(24px, 5vw, 52px);
+  box-shadow:
+    0 30px 60px rgba(194,24,91,.25),
+    0 4px 12px rgba(194,24,91,.15),
+    inset 0 0 0 1px rgba(194,24,91,.08);
+  background-image:
+    repeating-linear-gradient(180deg, transparent 0 38px, rgba(194,24,91,.05) 38.5px 39px);
+}
+
+.corner{
+  position:absolute;
+  width: 64px; height:64px;
+  opacity:.9;
+  filter: drop-shadow(0 3px 5px rgba(0,0,0,.12));
+}
+.corner svg{ width:100%; height:100%; }
+.corner-tl{ top:-14px; left:-14px; transform: rotate(-8deg); }
+.corner-tr{ top:-14px; right:-14px; transform: rotate(8deg) scaleX(-1); }
+.corner-bl{ bottom:-10px; left:-10px; width:48px; height:48px; }
+.corner-br{ bottom:0; right:0; width:90px; height:90px; opacity:.5; }
+
+/* Stickers extra a media altura de la hoja, para que se vea más llena de
+   Hello-Kitty-style y Spider-Man-style (personajes originales) */
+.mid-sticker{
+  position:absolute;
+  width:46px; height:46px;
+  opacity:.85;
+  filter: drop-shadow(0 3px 5px rgba(0,0,0,.1));
+  pointer-events:none;
+}
+.mid-sticker svg{ width:100%; height:100%; }
+.mid-left{ top:38%; left:-26px; transform: rotate(-10deg); }
+.mid-right{ top:60%; right:-26px; transform: rotate(10deg) scaleX(-1); }
+
+.title{
+  font-family: var(--font-display);
+  text-align:center;
+  font-size: clamp(1.5rem, 5vw, 2.3rem);
+  color: var(--pink-deep);
+  margin: 6px 0 10px;
+  text-shadow: 0 2px 0 #fff, 0 4px 10px rgba(194,24,91,.25);
+  animation: titlePop .7s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes titlePop{
+  0%{ transform: scale(.6); opacity:0; }
+  100%{ transform: scale(1); opacity:1; }
+}
+
+/* ============ FOTO AL ABRIR LA CARTA ============ */
+.photo-wrap{
+  display:flex;
+  justify-content:center;
+  margin: 4px 0 22px;
+  opacity:0;
+  transform: translateY(24px) scale(.85) rotate(-6deg);
+  transition: opacity .8s cubic-bezier(.34,1.56,.64,1), transform .8s cubic-bezier(.34,1.56,.64,1);
+}
+.photo-wrap.show{
+  opacity:1;
+  transform: translateY(0) scale(1) rotate(-3deg);
+}
+
+.polaroid{
+  background:#fff;
+  padding:10px 10px 40px;
+  border-radius:8px;
+  box-shadow: 0 16px 32px rgba(194,24,91,.3), 0 2px 6px rgba(0,0,0,.08);
+  position:relative;
+  width: 200px;
+  flex-shrink:0;
+}
+.polaroid.rotate-left{ transform: rotate(-5deg); }
+.polaroid.rotate-right{ transform: rotate(5deg); }
+
+.polaroid .frame{
+  position:relative;
+  width:100%;
+  height:200px;
+  border-radius:4px;
+  overflow:hidden;
+  background: linear-gradient(135deg, var(--pink-pastel), var(--pink-soft));
+}
+.polaroid img{
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+}
+.photo-placeholder{
+  position:absolute; inset:0;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:6px;
+  color: var(--pink-deep);
+  font-family: var(--font-display);
+  font-size:.82rem;
+  text-align:center;
+  padding: 0 10px;
+}
+.photo-placeholder .icon{ font-size:1.6rem; }
+
+.polaroid .caption{
+  position:absolute;
+  bottom:8px; left:0; right:0;
+  text-align:center;
+  font-family: var(--font-display);
+  color: var(--pink-deep);
+  font-size:.85rem;
+}
+.polaroid .tape{
+  position:absolute;
+  top:-10px; left:50%;
+  transform: translateX(-50%) rotate(-4deg);
+  width:64px; height:22px;
+  background: rgba(244,197,66,.6);
+  box-shadow: 0 2px 4px rgba(0,0,0,.15);
+  border-radius:2px;
+}
+.polaroid .corner-heart{
+  position:absolute;
+  top:-14px; right:-10px;
+  width:30px; height:30px;
+  filter: drop-shadow(0 3px 4px rgba(0,0,0,.2));
+}
+
+/* Foto doble al final */
+.photo-duo{
+  display:flex;
+  gap: 22px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin: 20px 0 6px;
+}
+.photo-duo .polaroid{ width:170px; }
+.photo-duo .polaroid .frame{ height:170px; }
+.photo-duo .polaroid{
+  opacity:0;
+  transform: translateY(30px) scale(.8);
+  transition: opacity .7s cubic-bezier(.34,1.56,.64,1), transform .7s cubic-bezier(.34,1.56,.64,1);
+}
+.photo-duo.show .polaroid{
+  opacity:1;
+  transform: translateY(0) scale(1);
+}
+.photo-duo.show .polaroid.rotate-left{ transition-delay: .15s; }
+.photo-duo.show .polaroid.rotate-right{ transition-delay: .35s; }
+
+.letter-body{
+  font-size: clamp(.98rem, 2.4vw, 1.12rem);
+  line-height: 1.85;
+  color: var(--ink);
+  min-height: 220px;
+  white-space: pre-wrap;
+}
+.letter-body .cursor{
+  display:inline-block;
+  width: 2px;
+  background: var(--pink-deep);
+  animation: blink 1s step-start infinite;
+  margin-left:2px;
+}
+@keyframes blink{ 50%{ opacity:0; } }
+
+.choice-buttons{
+  margin-top: 30px;
+  display:flex;
+  flex-wrap:wrap;
+  gap: 18px;
+  justify-content:center;
+  opacity:0;
+  transform: translateY(14px);
+  transition: opacity .6s ease, transform .6s ease;
+  pointer-events:none;
+  position:relative;
+  min-height: 60px;
+}
+.choice-buttons.ready{
+  opacity:1; transform: translateY(0); pointer-events:auto;
+}
+
+.btn-yes, .btn-think{
+  font-family: var(--font-display);
+  font-size: 1rem;
+  padding: 14px 26px;
+  border-radius: 40px;
+  border:none;
+  cursor:pointer;
+  transition: transform .25s ease, box-shadow .25s ease, left .35s ease, top .35s ease, background .3s ease;
+}
+.btn-yes{
+  background: linear-gradient(135deg, var(--pink-mid), var(--pink-deep));
+  color:#fff;
+  box-shadow: 0 10px 24px rgba(194,24,91,.4);
+  animation: yesPulse 1.6s ease-in-out infinite;
+}
+.btn-yes:hover{ transform: translateY(-3px) scale(1.05); }
+@keyframes yesPulse{
+  0%,100%{ box-shadow: 0 10px 24px rgba(194,24,91,.4); }
+  50%{ box-shadow: 0 14px 30px rgba(194,24,91,.6); }
+}
+
+.btn-think{
+  background: #fff;
+  color: var(--pink-deep);
+  border: 2px solid var(--pink-pastel);
+  position: relative;
+}
+.btn-think.wiggle{
+  animation: wiggleSide .5s ease-in-out;
+}
+@keyframes wiggleSide{
+  0%,100%{ transform: translateX(0) rotate(0deg); }
+  20%{ transform: translateX(-10px) rotate(-4deg); }
+  40%{ transform: translateX(10px) rotate(4deg); }
+  60%{ transform: translateX(-8px) rotate(-3deg); }
+  80%{ transform: translateX(8px) rotate(3deg); }
+}
+.btn-think.escaping{
+  position: fixed;
+  z-index: 50;
+}
+.btn-think.caught{
+  background: linear-gradient(135deg, var(--pink-mid), var(--pink-deep));
+  color:#fff;
+  border-color: transparent;
+}
+
+/* ============ ESCENA 3: FINAL ============ */
+.final-scene{
+  position:fixed;
+  inset:0;
+  z-index: 30;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow-y:auto;
+  background: radial-gradient(circle at center, rgba(255,217,232,.97), rgba(255,238,245,.99));
+  opacity:0;
+  pointer-events:none;
+  transition: opacity .7s ease;
+  text-align:center;
+  padding: 40px 24px;
+}
+.final-scene.show{ opacity:1; pointer-events:auto; }
+
+.final-line-1{
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 6vw, 2.6rem);
+  color: var(--pink-deep);
+  margin: 0 0 14px;
+  animation: titlePop .8s cubic-bezier(.34,1.56,.64,1) both;
+}
+.final-line-2{
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 4.4vw, 1.7rem);
+  color: var(--red-hero);
+  margin:0 0 10px;
+  text-shadow: 0 0 18px rgba(224,39,63,.35);
+  animation: glowText 1.8s ease-in-out infinite;
+}
+@keyframes glowText{
+  0%,100%{ text-shadow: 0 0 10px rgba(224,39,63,.25); }
+  50%{ text-shadow: 0 0 26px rgba(224,39,63,.55); }
+}
+
+/* ============ CAPA DE CELEBRACIÓN ============ */
+.celebration-layer{
+  position: fixed; inset:0;
+  z-index: 40;
+  pointer-events:none;
+  overflow:hidden;
+}
+.confetti{
+  position:absolute;
+  top:-5%;
+  border-radius: 2px;
+  animation: confettiFall linear forwards;
+}
+@keyframes confettiFall{
+  to{ transform: translateY(115vh) rotate(720deg); }
+}
+.burst-heart, .burst-kiss, .burst-web{
+  position:absolute;
+  animation: burstOut ease-out forwards;
+}
+@keyframes burstOut{
+  0%{ transform: translate(0,0) scale(.3); opacity:0; }
+  15%{ opacity:1; }
+  100%{ transform: translate(var(--dx), var(--dy)) scale(1); opacity:0; }
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 480px){
+  .paper{ padding: 22px 18px; }
+  .corner{ width:48px; height:48px; }
+  .corner-br{ width:64px; height:64px; }
+  .mid-sticker{ width:36px; height:36px; }
+  .mid-left{ left:-18px; }
+  .mid-right{ right:-18px; }
+  .choice-buttons{ flex-direction: column; align-items:center; }
+  .btn-yes, .btn-think{ width: 100%; max-width: 260px; text-align:center; }
+  .polaroid{ width: 160px; }
+  .polaroid .frame{ height:160px; }
+  .photo-duo .polaroid{ width:130px; }
+  .photo-duo .polaroid .frame{ height:130px; }
+  .photo-duo{ gap:14px; }
+}
+
+@media (min-width: 1200px){
+  .paper{ padding: 60px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
+</style>
+</head>
+<body>
+
+  <!-- ============ FONDO DECORATIVO GLOBAL ============ -->
+  <div class="bg-scene" id="bgScene" aria-hidden="true">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="glow glow-3"></div>
+    <div class="web web-tl"></div>
+    <div class="web web-tr"></div>
+    <div class="web web-bl"></div>
+    <div class="web web-br"></div>
+    <div class="web web-mid"></div>
+    <div class="stars" id="stars"></div>
+    <div class="floaters" id="floaters"></div>
+  </div>
+
+  <!-- ============ ESCENA 1: SOBRE CERRADO ============ -->
+  <main class="stage" id="stage">
+    <section class="envelope-scene" id="envelopeScene">
+      <div class="envelope" id="envelope" tabindex="0" role="button" aria-label="Abrir carta">
+        <div class="envelope-shadow"></div>
+        <div class="envelope-back"></div>
+        <div class="letter-peek"></div>
+        <div class="envelope-flap"></div>
+        <div class="wax-seal">
+          <svg viewBox="0 0 60 60" width="60" height="60">
+            <circle cx="30" cy="30" r="28" fill="#c2185b"/>
+            <path d="M30 16 C 22 16 16 22 16 29 C16 36 22 40 30 46 C38 40 44 36 44 29 C44 22 38 16 30 16 Z"
+                  fill="#e0356f" stroke="#fff2" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="envelope-front"></div>
+      </div>
+      <p class="press-hint">Presiona para abrir juajuajua</p>
+    </section>
+
+    <!-- ============ ESCENA 2: CARTA DESPLEGADA ============ -->
+    <section class="letter-scene" id="letterScene">
+      <div class="paper" id="paper">
+
+        <!-- Esquinas decoradas (gata + héroe originales) -->
+        <div class="corner corner-tl">
+          <svg viewBox="0 0 100 100"><use href="#deco-kitty"/></svg>
+        </div>
+        <div class="corner corner-tr">
+          <svg viewBox="0 0 100 100"><use href="#deco-hero"/></svg>
+        </div>
+        <div class="corner corner-bl deco-flower">
+          <svg viewBox="0 0 60 60"><use href="#deco-flower"/></svg>
+        </div>
+        <div class="corner corner-br">
+          <svg viewBox="0 0 100 100"><use href="#deco-web-corner"/></svg>
+        </div>
+
+        <!-- Stickers extra a media altura para más ambiente Kitty & héroe -->
+        <div class="mid-sticker mid-left">
+          <svg viewBox="0 0 100 100"><use href="#deco-hero2"/></svg>
+        </div>
+        <div class="mid-sticker mid-right">
+          <svg viewBox="0 0 100 100"><use href="#deco-kitty2"/></svg>
+        </div>
+
+        <h1 class="title">💖 PARA MI CHELITO 💖</h1>
+
+        <!-- ============ FOTO 1: aparece apenas se abre la carta ============ -->
+        <div class="photo-wrap" id="photoWrap">
+          <div class="polaroid rotate-left">
+            <div class="tape"></div>
+            <svg class="corner-heart" viewBox="0 0 28 28"><use href="#deco-heart" fill="#e0356f"/></svg>
+            <div class="frame">
+              <img src="i3.jpeg" alt="Nuestra foto" id="foto1"
+                   onerror="this.style.display='none'; this.parentElement.querySelector('.photo-placeholder').style.display='flex';">
+              <div class="photo-placeholder" style="display:none;">
+                <span class="icon">📷</span>
+                <span>Tu foto aquí<br>(guárdala como foto1.jpg)</span>
+              </div>
+            </div>
+            <p class="caption">nosotros 💕</p>
+          </div>
+        </div>
+
+        <div class="letter-body" id="letterBody"></div>
+
+        <div class="choice-buttons" id="choiceButtons">
+          <button class="btn-yes" id="btnYes">💖 SI ACEPTO 💖</button>
+          <button class="btn-think" id="btnThink">🥺 LO PENSARÉ</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ESCENA 3: RESPUESTA FINAL ============ -->
+    <section class="final-scene" id="finalScene">
+      <div class="final-content">
+        <p class="final-line-1" id="finalLine1">💖 SABÍA QUE DIRÍAS QUE SÍ 💖</p>
+        <p class="final-line-2" id="finalLine2">AHORA NO TE ME VAS A ESCAPAR MUEJEJEJEJEJEJ❤️</p>
+
+        <!-- ============ FOTOS 2 y 3: aparecen al aceptar la cita ============ -->
+        <div class="photo-duo" id="photoDuo">
+          <div class="polaroid rotate-left">
+            <div class="tape"></div>
+            <svg class="corner-heart" viewBox="0 0 28 28"><use href="#deco-heart" fill="#f4c542"/></svg>
+            <div class="frame">
+              <img src="i2.jpeg" alt="Nosotros" id="foto2"
+                   onerror="this.style.display='none'; this.parentElement.querySelector('.photo-placeholder').style.display='flex';">
+              <div class="photo-placeholder" style="display:none;">
+                <span class="icon">📷</span>
+                <span>Tu foto aquí<br>(guárdala como foto2.jpg)</span>
+              </div>
+            </div>
+            <p class="caption">te amo 🕷️</p>
+          </div>
+          <div class="polaroid rotate-right">
+            <div class="tape"></div>
+            <svg class="corner-heart" viewBox="0 0 28 28"><use href="#deco-heart" fill="#1c3c8c"/></svg>
+            <div class="frame">
+              <img src="i1.jpeg" alt="Nosotros" id="foto3"
+                   onerror="this.style.display='none'; this.parentElement.querySelector('.photo-placeholder').style.display='flex';">
+              <div class="photo-placeholder" style="display:none;">
+                <span class="icon">📷</span>
+                <span>Tu foto aquí<br>(guárdala como foto3.jpg)</span>
+              </div>
+            </div>
+            <p class="caption">mi favorito 💖</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Capa de partículas/confeti/besos para la celebración final -->
+  <div class="celebration-layer" id="celebrationLayer" aria-hidden="true"></div>
+
+  <!-- Audio suave de apertura -->
+  <audio id="chime" preload="auto">
+    <source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=" type="audio/wav">
+  </audio>
+
+  <!-- ============ DEFINICIONES SVG REUTILIZABLES ============ -->
+  <!-- Personajes ORIGINALES (no son Hello Kitty ni Spider-Man): una gatita con moño
+       y un héroe arácnido genérico, más una segunda pose de cada uno, en la misma
+       paleta rosa/rojo/azul del pedido. -->
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <!-- Gatita tierna con moño (pose 1) -->
+      <g id="deco-kitty">
+        <ellipse cx="50" cy="58" rx="30" ry="26" fill="#fff"/>
+        <ellipse cx="50" cy="58" rx="30" ry="26" fill="none" stroke="#2b2b2b" stroke-width="2.5"/>
+        <path d="M26 40 L18 20 L38 34 Z" fill="#fff" stroke="#2b2b2b" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M74 40 L82 20 L62 34 Z" fill="#fff" stroke="#2b2b2b" stroke-width="2.5" stroke-linejoin="round"/>
+        <ellipse cx="40" cy="55" rx="2.5" ry="3" fill="#2b2b2b"/>
+        <ellipse cx="60" cy="55" rx="2.5" ry="3" fill="#2b2b2b"/>
+        <ellipse cx="50" cy="62" rx="3" ry="2" fill="#f7a8c4"/>
+        <path d="M50 64 Q 44 68 40 64" fill="none" stroke="#2b2b2b" stroke-width="2" stroke-linecap="round"/>
+        <path d="M50 64 Q 56 68 60 64" fill="none" stroke="#2b2b2b" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="30" cy="63" r="4" fill="#f9c6da" opacity="0.85"/>
+        <circle cx="70" cy="63" r="4" fill="#f9c6da" opacity="0.85"/>
+        <line x1="16" y1="58" x2="2" y2="55" stroke="#2b2b2b" stroke-width="1.5"/>
+        <line x1="16" y1="63" x2="2" y2="63" stroke="#2b2b2b" stroke-width="1.5"/>
+        <line x1="84" y1="58" x2="98" y2="55" stroke="#2b2b2b" stroke-width="1.5"/>
+        <line x1="84" y1="63" x2="98" y2="63" stroke="#2b2b2b" stroke-width="1.5"/>
+        <g transform="translate(58,24) rotate(-12)">
+          <path d="M0 6 C0 0 8 -4 14 2 C20 -4 26 2 22 8 C18 14 8 16 0 6 Z" fill="#e0356f" stroke="#2b2b2b" stroke-width="2"/>
+        </g>
+      </g>
+
+      <!-- Gatita pose 2: saludando con la patita -->
+      <g id="deco-kitty2">
+        <ellipse cx="48" cy="60" rx="28" ry="24" fill="#fff"/>
+        <ellipse cx="48" cy="60" rx="28" ry="24" fill="none" stroke="#2b2b2b" stroke-width="2.5"/>
+        <path d="M26 42 L20 24 L38 36 Z" fill="#fff" stroke="#2b2b2b" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M70 42 L78 24 L58 36 Z" fill="#fff" stroke="#2b2b2b" stroke-width="2.5" stroke-linejoin="round"/>
+        <ellipse cx="40" cy="58" rx="2.3" ry="2.8" fill="#2b2b2b"/>
+        <ellipse cx="56" cy="58" rx="2.3" ry="2.8" fill="#2b2b2b"/>
+        <path d="M48 62 Q 43 66 39 62" fill="none" stroke="#2b2b2b" stroke-width="2" stroke-linecap="round"/>
+        <path d="M48 62 Q 53 66 57 62" fill="none" stroke="#2b2b2b" stroke-width="2" stroke-linecap="round"/>
+        <g transform="translate(56,26) rotate(-10)">
+          <path d="M0 6 C0 0 8 -4 14 2 C20 -4 26 2 22 8 C18 14 8 16 0 6 Z" fill="#1c3c8c" stroke="#2b2b2b" stroke-width="2"/>
+        </g>
+        <path d="M76 56 Q90 46 92 32" fill="none" stroke="#2b2b2b" stroke-width="2.5" stroke-linecap="round"/>
+        <ellipse cx="93" cy="30" rx="5" ry="6" fill="#fff" stroke="#2b2b2b" stroke-width="2"/>
+      </g>
+
+      <!-- Heroe arácnido tierno pose 1 (mascara redonda con telaraña, no es una marca) -->
+      <g id="deco-hero">
+        <ellipse cx="50" cy="50" rx="34" ry="38" fill="#e0273f"/>
+        <ellipse cx="50" cy="50" rx="34" ry="38" fill="none" stroke="#1c2a5e" stroke-width="3"/>
+        <path d="M50 12 L50 88 M20 22 Q50 50 20 78 M80 22 Q50 50 80 78 M20 50 L80 50 M28 30 Q50 50 28 70 M72 30 Q50 50 72 70"
+              stroke="#1c2a5e" stroke-width="1.6" fill="none" opacity="0.85"/>
+        <path d="M22 46 Q30 34 42 38 Q34 46 34 56 Q26 54 22 46 Z" fill="#fff" stroke="#1c2a5e" stroke-width="2.5"/>
+        <path d="M78 46 Q70 34 58 38 Q66 46 66 56 Q74 54 78 46 Z" fill="#fff" stroke="#1c2a5e" stroke-width="2.5"/>
+        <path d="M50 6 C40 6 34 12 34 12 L50 20 L66 12 C66 12 60 6 50 6 Z" fill="#1c3c8c" stroke="#1c2a5e" stroke-width="2"/>
+      </g>
+
+      <!-- Heroe pose 2: colgando de un hilo, saludando -->
+      <g id="deco-hero2">
+        <line x1="50" y1="0" x2="50" y2="18" stroke="#1c2a5e" stroke-width="1.5"/>
+        <ellipse cx="50" cy="46" rx="30" ry="34" fill="#e0273f"/>
+        <ellipse cx="50" cy="46" rx="30" ry="34" fill="none" stroke="#1c2a5e" stroke-width="3"/>
+        <path d="M50 12 L50 80 M24 20 Q50 46 24 72 M76 20 Q50 46 76 72 M22 46 L78 46"
+              stroke="#1c2a5e" stroke-width="1.5" fill="none" opacity="0.85"/>
+        <path d="M26 42 Q33 32 44 35 Q37 42 37 50 Q30 48 26 42 Z" fill="#fff" stroke="#1c2a5e" stroke-width="2.2"/>
+        <path d="M74 42 Q67 32 56 35 Q63 42 63 50 Q70 48 74 42 Z" fill="#fff" stroke="#1c2a5e" stroke-width="2.2"/>
+        <path d="M76 60 Q92 66 96 80" fill="none" stroke="#1c2a5e" stroke-width="3" stroke-linecap="round"/>
+      </g>
+
+      <!-- Flor pequeña decorativa -->
+      <g id="deco-flower">
+        <circle cx="30" cy="18" r="8" fill="#f7a8c4"/>
+        <circle cx="18" cy="30" r="8" fill="#f7a8c4"/>
+        <circle cx="42" cy="30" r="8" fill="#f7a8c4"/>
+        <circle cx="30" cy="42" r="8" fill="#f7a8c4"/>
+        <circle cx="30" cy="30" r="9" fill="#f4c542"/>
+      </g>
+
+      <!-- Telaraña de esquina -->
+      <g id="deco-web-corner" stroke="#c2185b" stroke-width="1.4" fill="none" opacity="0.55">
+        <path d="M100 0 L0 100"/>
+        <path d="M100 20 L20 100"/>
+        <path d="M100 40 L40 100"/>
+        <path d="M100 60 L60 100"/>
+        <path d="M100 0 Q60 40 100 100"/>
+        <path d="M100 0 Q40 60 20 100"/>
+      </g>
+
+      <!-- Corazón simple reutilizable para partículas -->
+      <g id="deco-heart">
+        <path d="M12 21 C-4 10 0 -2 12 4 C24 -2 28 10 12 21 Z" fill="currentColor"/>
+      </g>
+    </defs>
+  </svg>
+
+  <script>
+/* =========================================================
+   PARA MI CHELITO — Lógica de interacción
+   ========================================================= */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ---------- 1. FONDO: estrellas y flotadores (corazones, gata, héroe) ---------- */
+  const starsWrap = document.getElementById('stars');
+  const STAR_COUNT = 46;
+  for (let i = 0; i < STAR_COUNT; i++) {
+    const s = document.createElement('span');
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    s.style.animationDelay = (Math.random() * 3) + 's';
+    starsWrap.appendChild(s);
+  }
+
+  const floatersWrap = document.getElementById('floaters');
+
+  function spawnHeart() {
+    const el = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    el.setAttribute('viewBox', '0 0 28 28');
+    el.classList.add('floater', 'heart');
+    el.innerHTML = '<use href="#deco-heart"></use>';
+    const size = 14 + Math.random() * 18;
+    el.style.width = size + 'px';
+    el.style.height = size + 'px';
+    el.style.left = Math.random() * 100 + '%';
+    el.style.animationDuration = (8 + Math.random() * 8) + 's';
+    el.style.animationDelay = (Math.random() * -12) + 's';
+    floatersWrap.appendChild(el);
+  }
+  for (let i = 0; i < 22; i++) spawnHeart();
+
+  function spawnCharacter(type, cls) {
+    const el = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    el.setAttribute('viewBox', '0 0 100 100');
+    el.classList.add('floater', cls);
+    el.innerHTML = `<use href="#deco-${type}"></use>`;
+    el.style.left = Math.random() * 90 + '%';
+    el.style.top = (10 + Math.random() * 70) + '%';
+    el.style.animationDuration = (3 + Math.random() * 2) + 's';
+    el.style.animationDelay = (Math.random() * -3) + 's';
+    floatersWrap.appendChild(el);
+  }
+  spawnCharacter('hero', 'hero');
+  spawnCharacter('hero2', 'hero2');
+  spawnCharacter('hero', 'hero');
+  spawnCharacter('kitty', 'kitty');
+  spawnCharacter('kitty2', 'kitty2');
+  spawnCharacter('kitty', 'kitty');
+
+  /* ---------- 2. APERTURA DEL SOBRE ---------- */
+  const envelope = document.getElementById('envelope');
+  const envelopeScene = document.getElementById('envelopeScene');
+  const letterScene = document.getElementById('letterScene');
+  const photoWrap = document.getElementById('photoWrap');
+  const chime = document.getElementById('chime');
+  let opened = false;
+
+  function openEnvelope() {
+    if (opened) return;
+    opened = true;
+    envelope.classList.add('opening');
+    try { chime.currentTime = 0; chime.play().catch(() => {}); } catch (e) {}
+
+    burstMini(envelope.getBoundingClientRect());
+
+    setTimeout(() => {
+      envelopeScene.classList.add('hide');
+      letterScene.classList.add('show');
+      // La foto 1 aparece justo cuando se abre la carta, un pelín antes del texto
+      setTimeout(() => photoWrap.classList.add('show'), 250);
+      startTypewriter();
+    }, 1400);
+  }
+
+  envelope.addEventListener('click', openEnvelope);
+  envelope.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openEnvelope(); }
+  });
+
+  function burstMini(rect) {
+    const layer = document.getElementById('celebrationLayer');
+    for (let i = 0; i < 14; i++) {
+      const h = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      h.setAttribute('viewBox', '0 0 28 28');
+      h.classList.add('burst-heart');
+      h.style.width = h.style.height = (10 + Math.random() * 14) + 'px';
+      h.style.left = (rect.left + rect.width / 2) + 'px';
+      h.style.top = (rect.top + rect.height / 2) + 'px';
+      h.style.color = Math.random() > .5 ? '#e0356f' : '#f4c542';
+      const angle = Math.random() * Math.PI * 2;
+      const dist = 80 + Math.random() * 140;
+      h.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+      h.style.setProperty('--dy', (Math.sin(angle) * dist - 40) + 'px');
+      h.style.animationDuration = (1 + Math.random()) + 's';
+      h.innerHTML = '<use href="#deco-heart"></use>';
+      layer.appendChild(h);
+      setTimeout(() => h.remove(), 2200);
+    }
+  }
+
+  /* ---------- 3. MÁQUINA DE ESCRIBIR ---------- */
+  const letterBody = document.getElementById('letterBody');
+  const choiceButtons = document.getElementById('choiceButtons');
+
+  const letterText = `Para mi loquito del centro ❤️
+
+Sabes que me gustas mucho...que te amo demasiado.
+
+Que eres la persona mas especial para mi.
+
+Me haces sonreír incluso en los días difíciles.
+
+Amo cada momento que paso contigo.
+Amo tus ocurrencias.
+Amo tu forma de ser.
+Amo que compartamos demasiados gustos, y que para esta ocasion sea... Marvel 💖
+
+Y por eso quiero invitarte a algo muy especial.
+
+🍿❤️
+
+¿Aceptas tener una cita conmigo para ir a ver de Spider-Man Brand new day juntos?
+
+Se que ya habiamos dicho que iriamos
+  pero quise hacerte esta sorpresita 
+  y espero te haya gustado muchisimo :3
+Te amo muchísimo mi Andy. 💖
+
+❤️🕷️❤️`;
+
+  let typing = false;
+  function startTypewriter() {
+    if (typing) return;
+    typing = true;
+    letterBody.textContent = '';
+    const cursor = document.createElement('span');
+    cursor.className = 'cursor';
+    let i = 0;
+
+    function step() {
+      if (i < letterText.length) {
+        letterBody.textContent = letterText.slice(0, i + 1);
+        letterBody.appendChild(cursor);
+        i++;
+        const delay = letterText[i - 1] === '\n' ? 90 : 22;
+        setTimeout(step, delay);
+      } else {
+        cursor.remove();
+        choiceButtons.classList.add('ready');
+      }
+    }
+    step();
+  }
+
+  /* ---------- 4. BOTÓN "SI ACEPTO" Y CELEBRACIÓN ---------- */
+  const btnYes = document.getElementById('btnYes');
+  const btnThink = document.getElementById('btnThink');
+  const finalScene = document.getElementById('finalScene');
+  const finalLine1 = document.getElementById('finalLine1');
+  const finalLine2 = document.getElementById('finalLine2');
+  const celebrationLayer = document.getElementById('celebrationLayer');
+  const photoDuo = document.getElementById('photoDuo');
+  let celebrated = false;
+
+  function acceptDate(fromThinkButton) {
+    if (celebrated) return;
+    celebrated = true;
+
+    if (fromThinkButton) {
+      finalLine1.textContent = '😏 ¡SABÍA QUE NO PODRÍAS ESCAPAR!';
+      finalLine2.textContent = 'AL FINAL SIEMPRE IBAS A DECIR QUE SÍ ❤️';
+    } else {
+      finalLine1.textContent = '💖 SABÍA QUE DIRÍAS QUE SÍ 💖';
+      finalLine2.textContent = 'AHORA NO TE ME VAS A ESCAPAR MUEJEJEJEJEJEJ❤️';
+    }
+
+    finalScene.classList.add('show');
+    // Las fotos 2 y 3 aparecen junto con el mensaje de celebración
+    setTimeout(() => photoDuo.classList.add('show'), 200);
+    launchCelebration();
+  }
+
+  btnYes.addEventListener('click', () => acceptDate(false));
+
+  function launchCelebration() {
+    const colors = ['#e0356f', '#ffd9e8', '#f4c542', '#1c3c8c', '#e0273f', '#ffffff'];
+    for (let i = 0; i < 90; i++) {
+      const c = document.createElement('div');
+      c.className = 'confetti';
+      const size = 6 + Math.random() * 8;
+      c.style.width = size + 'px';
+      c.style.height = size * 0.4 + 'px';
+      c.style.left = Math.random() * 100 + '%';
+      c.style.background = colors[Math.floor(Math.random() * colors.length)];
+      c.style.animationDuration = (2.2 + Math.random() * 2) + 's';
+      c.style.animationDelay = (Math.random() * 1.2) + 's';
+      celebrationLayer.appendChild(c);
+      setTimeout(() => c.remove(), 5000);
+    }
+
+    const emojiPool = ['💖', '💋', '❤️', '✨', '🕸️'];
+    for (let i = 0; i < 40; i++) {
+      const e = document.createElement('div');
+      e.textContent = emojiPool[Math.floor(Math.random() * emojiPool.length)];
+      e.style.position = 'absolute';
+      e.style.left = Math.random() * 100 + '%';
+      e.style.bottom = '-40px';
+      e.style.fontSize = (16 + Math.random() * 20) + 'px';
+      e.style.animation = `floatUp ${3 + Math.random() * 3}s ease-in forwards`;
+      e.style.animationDelay = (Math.random() * 1.5) + 's';
+      celebrationLayer.appendChild(e);
+      setTimeout(() => e.remove(), 6500);
+    }
+
+    spawnCelebrationCharacter('hero');
+    setTimeout(() => spawnCelebrationCharacter('kitty'), 400);
+    setTimeout(() => spawnCelebrationCharacter('hero2'), 900);
+    setTimeout(() => spawnCelebrationCharacter('kitty2'), 1300);
+  }
+
+  function spawnCelebrationCharacter(type) {
+    const el = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    el.setAttribute('viewBox', '0 0 100 100');
+    el.style.position = 'absolute';
+    el.style.width = '70px';
+    el.style.height = '70px';
+    el.style.top = (20 + Math.random() * 50) + '%';
+    el.style.left = '-80px';
+    el.style.filter = 'drop-shadow(0 6px 10px rgba(0,0,0,.2))';
+    el.innerHTML = `<use href="#deco-${type}"></use>`;
+    el.style.transition = 'transform 3.2s ease-in-out, left 3.2s ease-in-out';
+    celebrationLayer.appendChild(el);
+    requestAnimationFrame(() => {
+      el.style.left = '110%';
+      el.style.transform = 'translateY(-30px) rotate(10deg)';
+    });
+    setTimeout(() => el.remove(), 3400);
+  }
+
+  /* ---------- 5. BOTÓN "LO PENSARÉ" — nunca desaparece, solo se mueve ---------- */
+  // Frases juguetonas que va diciendo cada vez que casi lo atrapan
+  const thinkPhrases = ['🥺 LO PENSARÉ', '🙈 ¡NO ME ATRAPAS!', '😳 ESPERA...', '😏 ¿SEGURO?', '🕸️ ¡CASI!'];
+  let phraseIndex = 0;
+  let escapeCount = 0;
+  const CAPTURES_TO_SURRENDER = 3; // tras "casi tocarlo" varias veces, se rinde y acepta
+
+  function nudgeThinkButton(clientX, clientY) {
+    if (celebrated) return;
+    const rect = btnThink.getBoundingClientRect();
+    const btnCenterX = rect.left + rect.width / 2;
+    const btnCenterY = rect.top + rect.height / 2;
+    const dist = Math.hypot(clientX - btnCenterX, clientY - btnCenterY);
+
+    if (dist < 140) {
+      btnThink.classList.add('escaping');
+      btnThink.classList.remove('wiggle');
+      void btnThink.offsetWidth; // reinicia la animación de wiggle
+      btnThink.classList.add('wiggle');
+
+      const margin = 20;
+      const maxLeft = window.innerWidth - rect.width - margin;
+      const maxTop = window.innerHeight - rect.height - margin;
+
+      // Movimiento principalmente HORIZONTAL (a los lados), con algo de aleatoriedad
+      const dir = (clientX > btnCenterX) ? -1 : 1;
+      const jumpX = dir * (140 + Math.random() * 90);
+      const jumpY = (Math.random() - 0.5) * 60;
+
+      const newLeft = Math.min(Math.max(margin, btnCenterX + jumpX - rect.width / 2), maxLeft);
+      const newTop = Math.min(Math.max(margin, btnCenterY + jumpY - rect.height / 2), maxTop);
+
+      btnThink.style.left = newLeft + 'px';
+      btnThink.style.top = newTop + 'px';
+
+      // Cada vez que se le acerca demasiado, cambia de frase juguetona
+      escapeCount++;
+      if (escapeCount % 2 === 0) {
+        phraseIndex = (phraseIndex + 1) % thinkPhrases.length;
+        btnThink.textContent = thinkPhrases[phraseIndex];
+      }
+
+      // Después de suficientes intentos, el botón "se rinde" y termina aceptando también,
+      // tal como pediste: que vuelva a decir que sí.
+      if (escapeCount >= CAPTURES_TO_SURRENDER * 2) {
+        btnThink.classList.add('caught');
+        btnThink.textContent = '💖 ¡ESTA BIEN, SI ACEPTO! 💖';
+        setTimeout(() => acceptDate(true), 500);
+      }
+    }
+  }
+
+  document.addEventListener('mousemove', (e) => nudgeThinkButton(e.clientX, e.clientY));
+  btnThink.addEventListener('touchstart', (e) => {
+    const t = e.touches[0];
+    nudgeThinkButton(t.clientX, t.clientY);
+    e.preventDefault();
+  }, { passive: false });
+
+  // Si por alguna razón sí lo llegan a "click-ear" (teclado/tab+enter), también cuenta como
+  // que aceptó, con el mismo mensaje divertido.
+  btnThink.addEventListener('click', () => {
+    if (!celebrated) acceptDate(true);
+  });
+
+  // pequeño rebote continuo de lado a lado mientras está en modo "escaping"
+  setInterval(() => {
+    if (btnThink.classList.contains('escaping') && !celebrated) {
+      btnThink.style.transform = `translateX(${Math.random() > 0.5 ? -4 : 4}px)`;
+      setTimeout(() => { btnThink.style.transform = 'translateX(0)'; }, 150);
+    }
+  }, 1200);
+
+});
+</script>
+</body>
+
+<!--
+=====================================================================
+  ARCHIVOS EXTRA (OPCIONALES) — incluidos aquí solo como referencia
+=====================================================================
+  Los dos bloques de abajo NO se ejecutan en el navegador: PHP corre
+  en un servidor y Python corre en tu computadora, no dentro de HTML.
+  Los dejo aquí, comentados, únicamente para que tengas TODO el
+  proyecto en un solo archivo.
+
+  Si algún día quieres usarlos de verdad:
+    1) Copia el bloque PHP en un archivo nuevo llamado "backend.php"
+    2) Copia el bloque Python en un archivo nuevo llamado "animation.py"
+  Ambos son 100% opcionales: la página funciona perfecta sin ellos.
+=====================================================================
+
+--- INICIO backend.php ---
+
+<?php
+/**
+ * backend.php
+ * -----------------------------------------------------------------
+ * Backend opcional para "Para mi Chelito".
+ *
+ * Este script NO es necesario para que la página funcione (todo el
+ * front-end funciona 100% en el navegador, sin servidor). Se incluye
+ * como pieza extra por si quieres guardar un recuerdo del momento en
+ * que tu Chelito presionó "SI ACEPTO 💖".
+ *
+ * Cómo conectarlo (opcional): en el script principal, dentro de
+ * acceptDate(), agrega antes de launchCelebration():
+ *
+ *     fetch('backend.php', {
+ *       method: 'POST',
+ *       headers: { 'Content-Type': 'application/json' },
+ *       body: JSON.stringify({ respuesta: 'si_acepto' })
+ *     });
+ *
+ * Requiere PHP 7.4+ en un hosting con soporte PHP.
+ * -----------------------------------------------------------------
+ */
+
+header('Content-Type: application/json; charset=utf-8');
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode(['ok' => false, 'error' => 'Método no permitido']);
+    exit;
+}
+
+$raw = file_get_contents('php://input');
+$data = json_decode($raw, true);
+
+if (!is_array($data) || empty($data['respuesta'])) {
+    http_response_code(400);
+    echo json_encode(['ok' => false, 'error' => 'Falta el campo "respuesta"']);
+    exit;
+}
+
+$respuesta = preg_replace('/[^a-zA-Z0-9_\-]/', '', $data['respuesta']);
+
+$logFile = __DIR__ . '/respuestas_chelito.log';
+$linea = sprintf(
+    "[%s] Respuesta: %s | IP: %s\n",
+    date('Y-m-d H:i:s'),
+    $respuesta,
+    $_SERVER['REMOTE_ADDR'] ?? 'desconocida'
+);
+
+$guardado = @file_put_contents($logFile, $linea, FILE_APPEND | LOCK_EX);
+
+if ($guardado === false) {
+    http_response_code(500);
+    echo json_encode(['ok' => false, 'error' => 'No se pudo guardar el recuerdo']);
+    exit;
+}
+
+echo json_encode([
+    'ok' => true,
+    'mensaje' => '💖 Momento guardado para siempre.'
+]);
+
+--- FIN backend.php ---
+
+
+--- INICIO animation.py ---
+
+"""
+animation.py
+-----------------------------------------------------------------
+Script auxiliar (opcional) para "Para mi Chelito".
+
+Genera un archivo JSON con posiciones, tamaños y retrasos
+"pre-calculados" para una lluvia de corazones y confeti, por si en
+el futuro quieres servir esas posiciones desde un backend en vez de
+generarlas con Math.random() en el cliente.
+
+Uso:
+    python animation.py
+-----------------------------------------------------------------
+"""
+
+import json
+import random
+
+PALETTE = ["#e0356f", "#ffd9e8", "#f4c542", "#1c3c8c", "#e0273f", "#ffffff"]
+
+
+def generar_corazones(cantidad: int = 24) -> list[dict]:
+    corazones = []
+    for _ in range(cantidad):
+        corazones.append({
+            "x": round(random.uniform(0, 100), 2),
+            "size": round(random.uniform(14, 32), 1),
+            "duration": round(random.uniform(8, 16), 2),
+            "delay": round(random.uniform(-12, 0), 2),
+            "color": random.choice(["#e0356f", "#f4c542"]),
+        })
+    return corazones
+
+
+def generar_confeti(cantidad: int = 90) -> list[dict]:
+    confeti = []
+    for _ in range(cantidad):
+        confeti.append({
+            "x": round(random.uniform(0, 100), 2),
+            "size": round(random.uniform(6, 14), 1),
+            "duration": round(random.uniform(2.2, 4.2), 2),
+            "delay": round(random.uniform(0, 1.2), 2),
+            "color": random.choice(PALETTE),
+        })
+    return confeti
+
+
+def main():
+    data = {
+        "hearts": generar_corazones(),
+        "confetti": generar_confeti(),
+    }
+    with open("particles.json", "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    print(f"✅ particles.json generado con {len(data['hearts'])} corazones "
+          f"y {len(data['confetti'])} piezas de confeti.")
+
+
+if __name__ == "__main__":
+    main()
+
+--- FIN animation.py ---
+
+=====================================================================
+-->
+</html>
